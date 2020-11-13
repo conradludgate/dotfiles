@@ -1,0 +1,17 @@
+order += "lm_sensors cpu"
+order += "diskdata"
+order += "clock"
+
+lm_sensors cpu {
+	sensors = ["core_*"]
+	format_chip = '{format_sensor}'
+    format_sensor = '\?color=auto.input {input}°C'
+}
+
+diskdata {
+	format = "{used}GB ({used_percent}%)"
+}
+
+clock {
+	format = "{Europe/London}"
+}

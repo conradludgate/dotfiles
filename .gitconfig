@@ -1,0 +1,15 @@
+[user]
+    email = conradludgate@gmail.com
+    name = Conrad Ludgate
+    signingkey = 3DD1A1DB3CB4BF63
+[commit]
+    gpgsign = true
+[tag]
+    forceSignAnnotated = true
+[pull]
+	rebase = true
+[core]
+    pager = delta --theme="Nord" --dark --plus-color="#012800" --minus-color="#340001"
+    excludesfile = ~/.gitignore
+[delta]
+	side-by-side = true

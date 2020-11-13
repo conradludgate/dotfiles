@@ -1,0 +1,184 @@
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+#
+# This config file uses keycodes (bindsym) and was written for the QWERTY
+# layout.
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+#
+
+set $mod Mod4
+
+default_border pixel 1
+hide_edge_borders both
+
+# Font
+font pango:Terminus 8
+
+# start a terminal
+bindsym $mod+Return exec termite
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# toggle floating
+bindsym $mod+Space floating toggle
+
+# start rofi
+bindsym $mod+d exec "rofi -combi-modi window,drun,ssh -show combi"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+w layout tabbed
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Main Workspaces
+set $wsSpotify ""
+for_window [class="Spotify"] move container to workspace $wsSpotify focus
+
+set $wsBrowser ""
+assign [class="Google-chrome"] $wsBrowser
+for_window [class="Google-chrome"] focus
+assign [class="Firefox"] $wsBrowser
+for_window [class="Firefox"] focus
+
+set $wsEdit ""
+assign [class="code-oss"] $wsEdit
+for_window [class="code-oss"] focus
+assign [class="Subl3"] $wsEdit
+for_window [class="Subl3"] focus
+
+set $wsTerm ""
+assign [class="Termite"] $wsTerm
+for_window [class="Termite"] focus
+
+set $wsGames ""
+assign [class="Steam"] $wsGames
+for_window [class="Steam"] focus
+
+set $wsMail ""
+assign [instance="Mail"] $wsMail
+for_window [instance="Mail"] focus
+
+set $wsPass ""
+assign [class="keepassx2"] $wsPass
+for_window [class="keepassx2"] focus
+
+set $wsChat ""
+for_window [title="weechat"] move to workspace $wsChat
+assign [class="discord"] $wsChat
+for_window [class="discord"] focus
+assign [class="TelegramDesktop"] $wsChat
+for_window [class="TelegramDesktop"] focus
+assign [class="whatsapp-nativefier-d40211"] $wsChat
+for_window [class="whatsapp-nativefier-d40211"] focus
+
+
+set $wsTwitter ""
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+bindsym $mod+s workspace $wsSpotify
+bindsym $mod+b workspace $wsBrowser
+bindsym $mod+t workspace $wsTerm
+bindsym $mod+e workspace $wsEdit
+bindsym $mod+m workspace $wsMail
+bindsym $mod+g workspace $wsGames
+bindsym $mod+k workspace $wsPass
+bindsym $mod+c workspace $wsChat
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+bindsym $mod+Shift+s move container to workspace $wsSpotify
+bindsym $mod+Shift+b move container to workspace $wsBrowser
+bindsym $mod+Shift+t move container to workspace $wsTerm
+bindsym $mod+Shift+e move container to workspace $wsEdit
+bindsym $mod+Shift+m move container to workspace $wsMail
+bindsym $mod+Shift+g move container to workspace $wsGames
+bindsym $mod+Shift+k move container to workspace $wsPass
+bindsym $mod+Shift+c move container to workspace $wsChat
+
+bindsym $mod+Tab workspace next
+bindsym $mod+grave Workspace prev
+bindsym Mod1+Tab focus right
+bindsym Mod1+grave focus left
+
+bindsym XF86MonBrightnessUp exec "xbacklight +5"
+bindsym Shift+XF86MonBrightnessUp exec "xbacklight +1"
+bindsym Shift+F6 exec "xbacklight +1"
+bindsym XF86MonBrightnessDown exec "xbacklight -5"
+bindsym Shift+XF86MonBrightnessDown exec "xbacklight -1"
+bindsym Shift+F5 exec "xbacklight -1"
+
+bindsym $mod+L exec "i3lock-fancy"
+
+bindsym $mod+Shift+P exec "~/.config/i3/screenshot.sh"
+
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	status_command py3status -c ~/.config/i3/py3status
+	position top
+
+	font pango:Terminus 8
+}
