@@ -101,7 +101,7 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 
-alias ls="lsd"
+alias ls="$HOME/.local/bin/lscat.sh"
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # Preferred editor for local and remote sessions
