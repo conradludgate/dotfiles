@@ -1,0 +1,14 @@
+#!/bin/bash -e
+if [ ! -x $(which mp) ]; then
+    echo "Please install multiplex: https://github.com/dankilman/multiplex"
+    exit 1
+fi
+
+ARGS=$@
+
+declare -a commands
+for service in $(docker-compose $ARGS ps --services); do
+    commands+=("docker-compose $ARGS logs --follow $service" "-t" "$service")
+done
+
+mp "${commands[@]}"
